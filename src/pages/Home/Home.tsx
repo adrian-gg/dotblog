@@ -1,79 +1,46 @@
-import { useEffect } from "react"
-import Nav from "../../components/Nav/Nav"
-import ArticleCard from "../../components/ArticleCard/ArticleCard"
-import Footer from "../../components/Footer/Footer"
-import ArticlesGrid from "../../components/ArticlesGrid/ArticlesGrid"
-import ArticleCardLoading from "../../components/ArticleCard/ArticleCardLoading"
-import { useArticlesStore } from "../../stores/articles"
-
+import { useEffect, useRef } from "react"
+import ArticleCardsGrid from "../../components/ArticleCardsGrid/ArticleCardsGrid"
+import useArticlesStore from "../../stores/articles"
+import "./Home.css"
 
 function Home() {
-  const [
-    articles,
-    articlesInFileTray,
-    loading,
-    getArticles,
-    resetArticles
-  ] = useArticlesStore((state) => [
-    state.articles,
-    state.articlesInFileTray,
-    state.loading,
-    state.getArticles,
-    state.resetArticles
-  ])
+  const { articles, getArticles, resetArticles, isLoading, hasMore, hasError } =
+    useArticlesStore()
+  const loaderRef = useRef(null)
 
   useEffect(() => {
     resetArticles()
     getArticles("")
-  }, [resetArticles, getArticles])
-  
+  }, [getArticles, resetArticles])
 
-  if(loading) return(<>
-    <Nav search={true}/>
+  useEffect(() => {
+    const currentLoader = loaderRef.current
 
-    <main>
-      <header>
-        <ArticleCardLoading />
-      </header>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !isLoading && !hasError) {
+          getArticles("")
+        }
+      },
+      { threshold: 1.0 }
+    )
 
-      <ArticlesGrid query={""} />
+    if (currentLoader) {
+      observer.observe(currentLoader)
+    }
+
+    return () => {
+      if (currentLoader) {
+        observer.unobserve(currentLoader)
+      }
+    }
+  }, [loaderRef, hasMore, isLoading, hasError, getArticles])
+
+  return (
+    <main id="home">
+      <ArticleCardsGrid data={articles} type="main" loaderRef={loaderRef} />
     </main>
-
-    <Footer topButton={true}/>
-  </>)
-
-  if(articles.length === 0 && !loading) return(<>
-    <Nav search={false}/>
-
-    <main style={{textAlign: 'center'}}>
-      <p className='text-2xl'>No articles found :(</p>
-      <p className='text-lg' style={{marginBottom: '4rem'}}>Reload the page to try again.</p>
-    </main>
-
-    <Footer topButton={false}/>
-  </>)
-
-  const isSaved = articlesInFileTray.some(
-    (articleSaved) => articles[0].title === articleSaved.title
   )
-
-  
-  return (<>
-    <Nav search={true}/>
-
-    <main>
-      <header>
-        <ArticleCard key={articles[0].title || "0"}
-          article={articles[0]}
-          saved={isSaved}
-        />
-      </header>
-
-      <ArticlesGrid query={""} />
-    </main>
-
-    <Footer topButton={true}/>
-  </>)
 }
 
 export default Home

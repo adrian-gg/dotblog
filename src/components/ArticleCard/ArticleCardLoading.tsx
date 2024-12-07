@@ -1,50 +1,63 @@
-import ArticleCardStyle from "./ArticleCard.module.css"
+import classNames from "../../utils/classNames"
+import "./ArticleCard.css"
 
+interface ArticleCardProps {
+  type?: "main" | "filetray"
+}
 
-const ArticleCardLoading = () => {
-  const textTitlePlaceholder = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae excepturi, veniam impedit corporis atque, numquam voluptatum inventore ullam sequi."
-  .split(" ")
+const titlePlaceholder =
+  "Lorem ipsum dolor sit amet consectet isicing elit vitae except uri."
+const textPlaceholder =
+  "Lorem ipsum dolor sit amet consectet isicing elit. Vitae excepturi, veniam impedit corporis atque, numquam voluptatum inventore ullam sequi."
 
+function ArticleCardLoading({ type }: ArticleCardProps) {
+  const generatePlaceholder = (placeholder: string, type: "title" | "text") => {
+    const placeholderLength = placeholder.split(" ")
 
-  return(    
-    <article className={ArticleCardStyle.card}>
-      <div className={ArticleCardStyle.img_box}>
-        <div className={ArticleCardStyle.img}></div>        
-      </div>
-      
-      <div className="container-col">
-        <h1 className={`${ArticleCardStyle.text_loading} text-2xl`}>
-          {
-            textTitlePlaceholder.map((word, i) => {
-              if(i < 10) return(
-                <span key={i+"a"}><span className="word_loading">{word}</span><span> </span></span>
-              )
-            })
-          }
-        </h1>
+    return placeholderLength.map((word, i) => {
+      const stylesWord = type === "title" ? { width: `${word.length}ch` } : {}
+      const wordContent = type !== "title" ? word : ""
 
-        <p className={`${ArticleCardStyle.parraf} ${ArticleCardStyle.text_loading} text-sm`}>
-          {
-            textTitlePlaceholder.map((word, i) => {
-              return(
-                <span key={i+"b"}><span className="word_loading">{word}</span><span> </span></span>
-              )
-            })
-          }
-        </p>
+      return (
+        <span key={`${type}-${i}`}>
+          <span className="word-loading" style={stylesWord}>
+            {wordContent}
+          </span>
+        </span>
+      )
+    })
+  }
 
-        <div className={`${ArticleCardStyle.more_data} container-row`}>
-          <p className={`${ArticleCardStyle.author} ${ArticleCardStyle.text_loading} text-sm`}>
-            <span>by unknown</span>
+  const generatePlaceholderTitle = () => {
+    return generatePlaceholder(titlePlaceholder, "title")
+  }
+
+  const generatePlaceholderText = () => {
+    return generatePlaceholder(textPlaceholder, "text")
+  }
+
+  return (
+    <article
+      className={classNames("card", "card-loading", type && `card--${type}`)}>
+      <header className="card-header">
+        <div className="card-image"></div>
+      </header>
+
+      <main className="card-body">
+        <h1 className="card-title">{generatePlaceholderTitle()}</h1>
+        <p className="card-text">{generatePlaceholderText()}</p>
+
+        <div className="card-footer">
+          <p>
+            <span className="word-loading">by author</span>
           </p>
-          <time className={`${ArticleCardStyle.date} ${ArticleCardStyle.text_loading} text-xs`}>
-            <span>unknown</span>
-          </time>
-        </div>                
-      </div>
+          <p>
+            <span className="word-loading">date time</span>
+          </p>
+        </div>
+      </main>
     </article>
   )
-  
 }
 
 export default ArticleCardLoading

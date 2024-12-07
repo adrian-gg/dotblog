@@ -1,0 +1,26 @@
+.navigation {
+  max-width: 84rem;
+  margin: 0 auto;
+  margin-bottom: 4.9rem;
+  padding-bottom: 1rem;
+  background-color: var(--primary-bg);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  position: sticky;
+  top: calc(4rem + 2.7rem);
+  z-index: 999;
+}
+
+.navigation > p {
+  font-size: var(--fz-h6);
+}
+
+#search .empty {
+  height: 49vh;
+  height: 49dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--tertiary-color);
+}

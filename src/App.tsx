@@ -1,28 +1,35 @@
-import { Routes, Route } from "react-router-dom"
+import { useState } from "react"
+import { Outlet } from "react-router-dom"
 import "./App.css"
-import Home from './pages/Home/Home'
-import FileTray from "./pages/FileTray/FileTray"
-import Search from "./pages/Search/Search"
-import Page404 from './pages/Page404/Page404'
-import { useArticlesStore } from "./stores/articles"
+import ButtonTop from "./components/ButtonTop/ButtonTop"
+import FileTray from "./components/FileTray/FileTray"
+import Footer from "./components/Footer/Footer"
+import Navbar from "./components/Navbar/Navbar"
+import classNames from "./utils/classNames"
 
+function App() {
+  const [filetrayOpen, setFiletrayOpen] = useState(false)
 
-const App = () => {
-  const fileTrayOpened = useArticlesStore((state) => state.fileTrayOpened)
+  return (
+    <>
+      <div className={classNames("container", filetrayOpen && "modal--opened")}>
+        <div className="box">
+          <Navbar setFiletrayOpen={setFiletrayOpen} />
+          <Outlet />
+        </div>
 
-  return (<>
-    <div className={fileTrayOpened ? "app_container overflow" : "app_container"}>
-      <Routes>
-        <Route path="/">
-          <Route index element={<Home />} />
-          <Route path="search/:query" element={<Search />} />
-          <Route path="*" element={<Page404 />} />
-        </Route>
-      </Routes>
-    </div>
+        <ButtonTop />
 
-    { fileTrayOpened ? <FileTray /> : <></> }
-  </>)
+        <Footer />
+      </div>
+
+      {filetrayOpen && (
+        <div className="container-modal">
+          <FileTray setFiletrayOpen={setFiletrayOpen} />
+        </div>
+      )}
+    </>
+  )
 }
 
 export default App

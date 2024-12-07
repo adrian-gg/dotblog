@@ -1,99 +1,75 @@
-import { IoAdd } from 'react-icons/io5'
-import { useEffect, useRef } from 'react'
-import ArticleCardStyle from "./ArticleCard.module.css"
-import Button from '../Button/Button'
+import { IoAdd, IoRemove } from "react-icons/io5"
+import useArticlesStore from "../../stores/articles"
+import type { ArticleMappedType } from "../../type"
+import classNames from "../../utils/classNames"
 import humanice from "../../utils/humanice"
-import { useArticlesStore } from '../../stores/articles'
-import { type ArticleType } from '../../type.d'
+import Button from "../Button/Button"
+import Image from "../Image/Image"
+import "./ArticleCard.css"
 
-
-interface Props {
-  article: ArticleType;
-  saved?: boolean;
+interface ArticleCardProps {
+  type?: "main" | "filetray"
+  data: ArticleMappedType
 }
-const ArticleCard = ({ article, saved }: Props) => {
-  const saveArticleToRead = useArticlesStore((state) => state.saveArticleToRead)
-  const {
-    author,
-    title,
-    url,
-    urlToImage,
-    publishedAt,
-    content,
-  } = article
+function ArticleCard({ type, data }: ArticleCardProps) {
+  const { saveArticleToRead, removeArticleFromFileTray } = useArticlesStore()
+  const { title, description, author, publishedAt, urlToImage, url, saved } =
+    data
+  const dateHumaniced = humanice(publishedAt)
 
-  const handleClick = () => {  
-    saveArticleToRead(article)
+  const handleClickAddToFileTray = () => {
+    saveArticleToRead(data)
   }
 
-  const imgRef = useRef<HTMLImageElement | null>(null)
+  const handleClickRemoveFromFileTray = () => {
+    removeArticleFromFileTray(data)
+  }
 
-  useEffect(() => {
-    const img = imgRef.current
-    const observer = new IntersectionObserver((entries) => {
+  return (
+    <article className={classNames("card", type && `card--${type}`)}>
+      <header className="card-header">
+        {!saved && (
+          <Button
+            type="button"
+            variant="secondary"
+            action={handleClickAddToFileTray}>
+            <IoAdd />
+          </Button>
+        )}
 
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (img && img.dataset.src) {
-            img.src = img.dataset.src
-          }
-          observer.disconnect()
-        }
-      })
-    })
-
-    if (img) {
-      observer.observe(img)
-    }
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [])
-
-  
-  return(    
-    <article className={ArticleCardStyle.card}>
-      <div className={ArticleCardStyle.img_box}>
-
-        {
-          !saved
-          ? <div className={`${ArticleCardStyle.save} text-lg`} onClick={handleClick}>
-              <Button type="button" typeStyle="primary-icon"><IoAdd /></Button>
-            </div>
-          : <></>
-        }
-
-        <a href={url} target="_blank">
-          { urlToImage
-            ? <img 
-                className={ArticleCardStyle.img} 
-                data-src={urlToImage} 
-                width="538" 
-                height="334" 
-                alt={title} 
-                ref={imgRef}
-              />
-            : <></>
-          }
-        </a>
-      </div>
-      
-      <a href={url} target="_blank">
-        <div className="container-col">
-          <h1 className="text-2xl">{title}</h1>
-
-          <p className={`${ArticleCardStyle.parraf} text-sm`}>{content}</p>
-
-          <div className={`${ArticleCardStyle.more_data} container-row`}>
-            <p className="text-sm">{`by ${author ?? 'unknown'}`}</p>
-            <time className={`${ArticleCardStyle.date} text-xs`} dateTime={publishedAt} >{ humanice(publishedAt) }</time>
-          </div>
+        <div className="card-image">
+          <a href={url} target="_blank">
+            <Image src={urlToImage} alt={title} />
+          </a>
         </div>
-      </a>
+      </header>
+
+      <main className="card-body">
+        <a href={url} target="_blank">
+          <h1 className="card-title">{title}</h1>
+          <p className="card-text">{description}</p>
+
+          <div className="card-footer">
+            <p>{author ? `by ${author}` : "by unknown"}</p>
+            <p>
+              <time dateTime={publishedAt}>{dateHumaniced}</time>
+            </p>
+          </div>
+        </a>
+      </main>
+
+      {type === "filetray" && (
+        <div className="card-sidebar">
+          <Button
+            type="button"
+            variant="outline-primary"
+            action={handleClickRemoveFromFileTray}>
+            <IoRemove />
+          </Button>
+        </div>
+      )}
     </article>
   )
-  
 }
 
 export default ArticleCard

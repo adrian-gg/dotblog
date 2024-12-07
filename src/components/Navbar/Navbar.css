@@ -1,0 +1,27 @@
+.navbar {
+  width: 100%;
+  max-width: 108rem;
+  height: calc(4rem + 2.8rem);
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  padding: 1.4rem 0;
+  background-color: var(--primary-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.navbar-brand {
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}

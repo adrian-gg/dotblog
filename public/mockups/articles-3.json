@@ -1,0 +1,136 @@
+{
+  "status": "ok",
+  "totalResults": 30,
+  "articles": [
+    {
+      "source": {
+        "id": "associated-press",
+        "name": "Associated Press"
+      },
+      "author": null,
+      "title": "Storm Darragh batters UK and Ireland, leaving 1 dead and hundreds of thousands without power - The Associated Press",
+      "description": "A man died and hundreds of thousands of people in Britain and Ireland have been left without power as high winds and heavy rain battered the region. Gusts of up to 93 miles per hour were recorded as officials sent a rare emergency alert by phone to about 3 mi…",
+      "url": "https://apnews.com/article/storm-darragh-britain-ireland-wind-rain-wales-f9d74be4f3516eea499033aaf0f4f0d1",
+      "urlToImage": "https://dims.apnews.com/dims4/default/be5be4c/2147483647/strip/true/crop/4000x2250+0+209/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F45%2F7b%2F4dee22dc7218ce2ffe0dcc6b52fa%2F865e9a022fa949caad47a3d6dc8c0b3b",
+      "publishedAt": "2024-12-07T14:04:00Z",
+      "content": "LONDON (AP) A man died and hundreds of thousands of people in Britain and Ireland were left without power Saturday as high winds and heavy rain battered the region. \r\nGusts of up to 93 miles per hour… [+990 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "BBC News"
+      },
+      "author": null,
+      "title": "US orders bird flu testing of national dairy supply - BBC.com",
+      "description": "More than 700 dairy herds have been infected across the country since March, mostly in California.",
+      "url": "https://www.bbc.com/news/articles/c8ewwlgz7k9o",
+      "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/bfb0/live/739edfd0-b406-11ef-a4d0-4f4ff48ca12b.jpg",
+      "publishedAt": "2024-12-07T13:51:09Z",
+      "content": "The US national milk supply will begin being tested for bird flu, according to a new federal order announced on Friday by the Department of Agriculture. \r\nAs part of the mandate, entities and firms t… [+2645 chars]"
+    },
+    {
+      "source": {
+        "id": "cbs-news",
+        "name": "CBS News"
+      },
+      "author": null,
+      "title": "Explosion destroys apartment block in Dutch city, kills at least 3 and injures several others - CBS News",
+      "description": "The cause of the disaster is unclear but police said a car drove away from the scene \"at very high speed\" shortly after.",
+      "url": "https://www.cbsnews.com/news/explosion-fire-apartments-the-hague-netherlands/",
+      "urlToImage": "https://assets3.cbsnewsstatic.com/hub/i/r/2024/12/07/5a59515e-415e-4bd7-96d6-7f7b6951519c/thumbnail/1200x630/f4d42059f24fa914ad35ee6f46ef08f4/ap24342409581542.jpg?v=d633d0331cc96a4353754b3de830df72",
+      "publishedAt": "2024-12-07T12:47:00Z",
+      "content": "An explosion and fire destroyed several apartments in a neighborhood in the Dutch city of The Hague early Saturday, killing at least three people and injuring multiple people, police said.\r\nThe cause… [+3045 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "[Removed]"
+      },
+      "author": null,
+      "title": "[Removed]",
+      "description": "[Removed]",
+      "url": "https://removed.com",
+      "urlToImage": null,
+      "publishedAt": "2024-12-07T10:04:00Z",
+      "content": "[Removed]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Motley Fool"
+      },
+      "author": "Matt DiLallo",
+      "title": "2 High-Yield Dividend ETFs to Buy to Generate Passive Income - The Motley Fool",
+      "description": "",
+      "url": "https://www.fool.com/investing/2024/12/07/2-high-yield-dividend-etfs-to-buy-to-generate-pass/",
+      "urlToImage": "https://g.foolcdn.com/editorial/images/799548/a-pad-with-passive-income-written-on-it.jpg",
+      "publishedAt": "2024-12-07T09:32:00Z",
+      "content": "Exchange-traded funds (ETFs) are excellent passive investment vehicles. They hold baskets of stocks or other investments, which helps provide diversification and reduce risk. Because of that, you don… [+3955 chars]"
+    },
+    {
+      "source": {
+        "id": "business-insider",
+        "name": "Business Insider"
+      },
+      "author": "Ayelet Sheffey",
+      "title": "Elon Musk says DOGE can 'gut the federal government' with a recent Supreme Court ruling. Some lawyers disagree. - Business Insider",
+      "description": "Elon Musk and Vivek Ramaswamy said the overruling of the Chevron doctrine will help them cut spending through DOGE. Some legal experts aren't so sure.",
+      "url": "https://www.businessinsider.com/elon-musk-ramaswamy-doge-spending-cuts-chevron-doctrine-scotus-trump-2024-12",
+      "urlToImage": "https://i.insider.com/67534ded8fbb2783ed305c3b?width=1200&format=jpeg",
+      "publishedAt": "2024-12-07T09:30:00Z",
+      "content": "The Supreme Court might not help Elon Musk and Vivek Ramaswamy's spending cut goals as much as they might think.\r\nPresident-elect Donald Trump tapped Musk and Ramaswamy to lead a new Department of Go… [+7733 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "BBC News"
+      },
+      "author": null,
+      "title": "Dominican Republic records largest ever cocaine seizure - BBC.com",
+      "description": "Authorities say the shipment, hidden in bananas, was destined for Europe.",
+      "url": "https://www.bbc.com/news/articles/cn9gg220xzjo",
+      "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/a448/live/d29ee750-b474-11ef-a2ca-e99d0c9a24e3.jpg",
+      "publishedAt": "2024-12-07T08:58:02Z",
+      "content": "Authorities in the Dominican Republican say cocaine discovered in the country's largest-ever seizure was headed to Europe.\r\nHidden in a banana shipment, officials found 9,500kg of the drug at a port … [+1183 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Redheaded Blackbelt"
+      },
+      "author": "Lisa Music",
+      "title": "Humboldt Has Serious Damage from 7.0 Quake, Though Not as Bad as in 2023 - Redheaded Blackbelt",
+      "description": "Though Thursday’s quake didn’t match the devastation of 2023, photos and videos suggest the damage is more serious than first thought.",
+      "url": "https://kymkemp.com/2024/12/07/north-coast-recovers-from-7-0-earthquake-amid-ongoing-preparedness-efforts/",
+      "urlToImage": "https://kymkemp.com/wp-content/uploads/2024/12/Jessie-N-Brett-Coleman.jpg",
+      "publishedAt": "2024-12-07T08:02:16Z",
+      "content": "Earthquake Damage to Shively Road [Photo from Jessie and Brett Coleman]\r\nThe 7.0 magnitude earthquake that struck Northern Californias coast on December 5, 2024, left Humboldt, Mendocino, and Del Nor… [+4446 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Vulture"
+      },
+      "author": "Alejandra Gularte",
+      "title": "Sabrina Carpenter and Chappell Roan Do Some Christmas Karaoke - Vulture",
+      "description": "Sabrina Carpenter & Chappell Roan are doing some holiday karaoke, singing ‘Last Christmas’ for Carpenter’s Netflix special, A Nonsense Christmas.",
+      "url": "http://www.vulture.com/article/sabrina-carpenter-chappell-roan-last-christmas.html",
+      "urlToImage": "https://pyxis.nymag.com/v1/imgs/790/f49/f80edfe75edec35c5487f664521a2a4648-sabrina-carpenter-chappell-roan.1x.rsocial.w1200.jpg",
+      "publishedAt": "2024-12-07T06:55:14Z",
+      "content": "The best way to end a house party is late-night karaoke, and Sabrina Carpenter and Chappell Roan must agree. In Carpenters Netflix special, A Nonsense Christmas, which is out right now, the two step … [+579 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Android Police"
+      },
+      "author": "Timi Cantisano",
+      "title": "Exclusive new Google TV Advisors club is like Pixel Superfans for Chromecast enthusiasts - Android Police",
+      "description": "A new way to leave feedback",
+      "url": "https://www.androidpolice.com/google-tv-advisors-club-release/",
+      "urlToImage": "https://static1.anpoimages.com/wordpress/wp-content/uploads/wm/2024/09/google-tv-streamer-box.jpg",
+      "publishedAt": "2024-12-07T01:00:00Z",
+      "content": "Despite Google not having too much streaming hardware on its own storefront, the brand has done quite well when it comes to getting its streaming experience into millions of homes, simply by bundling… [+1936 chars]"
+    }
+  ]
+}

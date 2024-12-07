@@ -1,0 +1,14 @@
+.cards {
+  width: 100%;
+  max-width: 84rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  grid-gap: 5.18rem 2.3rem;
+}
+
+.cards--filetray {
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+}

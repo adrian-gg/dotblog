@@ -1,74 +1,65 @@
-import { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { IoChevronBack } from 'react-icons/io5'
-import Nav from '../../components/Nav/Nav'
-import Footer from '../../components/Footer/Footer'
-import ArticlesGrid from '../../components/ArticlesGrid/ArticlesGrid'
-import Button from '../../components/Button/Button'
-import { useArticlesStore } from '../../stores/articles'
-
+//import SearchStyle from './Search.module.css'
+import { useEffect, useRef } from "react"
+import { IoChevronBack } from "react-icons/io5"
+import { Link, useParams } from "react-router-dom"
+import ArticleCardsGrid from "../../components/ArticleCardsGrid/ArticleCardsGrid"
+import Button from "../../components/Button/Button"
+import useArticlesStore from "../../stores/articles"
+import "./Search.css"
 
 function Search() {
-  const [articles, loading, getArticles, resetArticles] = useArticlesStore((state) => [
-    state.articles,
-    state.loading,
-    state.getArticles,
-    state.resetArticles,
-  ])
   const { query } = useParams()
+  const { articles, hasMore, isLoading, hasError, getArticles, resetArticles } =
+    useArticlesStore()
+  const loaderRef = useRef(null)
 
   useEffect(() => {
-    if (query) {
-      resetArticles()
-      getArticles(query)
+    resetArticles()
+    getArticles(query || "")
+    window.scrollTo(0, 0)
+  }, [query, getArticles, resetArticles])
+
+  useEffect(() => {
+    const currentLoader = loaderRef.current
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !isLoading && !hasError) {
+          getArticles(query || "")
+        }
+      },
+      { threshold: 1.0 }
+    )
+
+    if (currentLoader) {
+      observer.observe(currentLoader)
     }
-  }, [query, resetArticles, getArticles])
 
+    return () => {
+      if (currentLoader) {
+        observer.unobserve(currentLoader)
+      }
+    }
+  }, [loaderRef, hasMore, isLoading, hasError, query, getArticles])
 
-  if(loading) return(<>
-    <Nav search={true} />
+  return (
+    <main id="search">
+      <div className="navigation">
+        <Link to="/">
+          <Button type="button" variant="secondary">
+            <IoChevronBack />
+          </Button>
+        </Link>
+        <p>Search: {query}</p>
+      </div>
 
-    <main>
-    <header className='container-row --ai-center'>
-      <Button type="button" typeStyle="tertiary-icon"><IoChevronBack /></Button>
-      <p className='text-lg'>Search: {query}</p>
-    </header>
-
-      <ArticlesGrid query={query || ""} />
+      {articles.length > 0 ? (
+        <ArticleCardsGrid data={articles} loaderRef={loaderRef} />
+      ) : (
+        <p className="empty">Articles not found :(</p>
+      )}
     </main>
-  </>)
-  
-  if(articles.length <= 0 && !loading) return(<>
-    <Nav search={true} />
-
-    <main style={{textAlign: 'center'}}>
-    <header className='container-row --ai-center'>
-      <Link to="/"><Button type="button" typeStyle="tertiary-icon"><IoChevronBack /></Button></Link>
-      <p className='text-lg'>Search: {query}</p>
-    </header>
-
-      <p className='text-2xl'>No articles found :(</p>
-    
-    </main>
-
-    <Footer topButton={false} />
-  </>)
-
-
-  return (<>
-    <Nav search={true} />
-
-    <main>
-      <header className='container-row --ai-center'>
-        <Link to="/"><Button type="button" typeStyle="tertiary-icon"><IoChevronBack /></Button></Link>
-        <p className='text-lg'>Search: {query}</p>
-      </header>
-
-      <ArticlesGrid query={query || ""}/>
-    </main>
-
-    <Footer topButton={true} />
-  </>)
+  )
 }
 
 export default Search

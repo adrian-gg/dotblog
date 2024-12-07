@@ -1,0 +1,20 @@
+.error-page {
+  height: 100dvh;
+  padding: 4.2rem calc(1rem + 0.5vw);
+  background-color: var(--primary-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-title {
+  margin-bottom: 1rem;
+  font-size: var(--fz-h1);
+  font-weight: bold;
+}
+
+.error-subtitle {
+  margin-bottom: 4rem;
+  font-size: var(--fz-h5);
+}

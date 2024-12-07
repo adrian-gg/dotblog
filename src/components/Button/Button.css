@@ -1,0 +1,141 @@
+.btn {
+  --btn-padding-x: 1.26rem;
+  --btn-padding-y: 1.4rem;
+  --btn-font-size: 1.2rem; /* 0.9rem */
+  --btn-font-weight: 400;
+  --btn-line-height: 1.5px;
+  --btn-color: var(--primary-color);
+  --btn-bg: transparent;
+  --btn-border-width: var(--border-width);
+  --btn-border-color: transparent;
+  --btn-border-radius: var(--border-radius);
+  --btn-hover-border-color: transparent;
+  --btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 1px 1px rgba(0, 0, 0, 0.075);
+  --btn-disabled-opacity: 0.65;
+  --btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--btn-focus-shadow-rgb), 0.5);
+
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border: var(--btn-border-width) solid var(--btn-border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--btn-bg);
+  display: inline-block;
+  color: var(--btn-color);
+  font-size: var(--btn-font-size);
+  line-height: var(--btn-line-height);
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn:hover {
+  border-color: var(--btn-hover-border-color);
+  background-color: var(--btn-hover-bg);
+  color: var(--btn-hover-color);
+}
+
+.btn:focus-visible {
+  border-color: var(--btn-hover-border-color);
+  background-color: var(--btn-hover-bg);
+  outline: 0;
+  color: var(--btn-hover-color);
+  box-shadow: var(--btn-focus-box-shadow);
+}
+
+.btn:active {
+  border-color: var(--btn-active-border-color);
+  background-color: var(--btn-active-bg);
+  color: var(--btn-active-color);
+}
+
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
+  border-color: var(--btn-disabled-border-color);
+  background-color: var(--btn-disabled-bg);
+  color: var(--btn-disabled-color);
+  opacity: var(--btn-disabled-opacity);
+  pointer-events: none;
+}
+
+.btn-primary {
+  --btn-bg: #212529;
+  --btn-border-color: #212529;
+  --btn-color: #fff;
+  --btn-hover-bg: #424649;
+  --btn-hover-border-color: #373b3e;
+  --btn-hover-color: #fff;
+  --btn-focus-shadow-rgb: 66, 70, 73;
+  --btn-active-bg: #4d5154;
+  --btn-active-border-color: #373b3e;
+  --btn-active-color: #fff;
+  --btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --btn-disabled-bg: #212529;
+  --btn-disabled-border-color: #212529;
+  --btn-disabled-color: #fff;
+}
+
+.btn-secondary {
+  --btn-bg: #f8f9fa;
+  --btn-border-color: #f8f9fa;
+  --btn-color: #000;
+  --btn-hover-bg: #d3d4d5;
+  --btn-hover-border-color: #c6c7c8;
+  --btn-hover-color: #000;
+  --btn-focus-shadow-rgb: 211, 212, 213;
+  --btn-active-bg: #c6c7c8;
+  --btn-active-border-color: #babbbc;
+  --btn-active-color: #000;
+  --btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --btn-disabled-bg: #f8f9fa;
+  --btn-disabled-border-color: #f8f9fa;
+  --btn-disabled-color: #000;
+}
+
+.btn-outline-primary {
+  --btn-color: #212529;
+  --btn-border-color: #212529;
+  --btn-hover-bg: #212529;
+  --btn-hover-border-color: #212529;
+  --btn-hover-color: #fff;
+  --btn-focus-shadow-rgb: 33, 37, 41;
+  --btn-active-bg: #212529;
+  --btn-active-border-color: #212529;
+  --btn-active-color: #fff;
+  --btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --btn-disabled-bg: transparent;
+  --btn-disabled-border-color: #212529;
+  --btn-disabled-color: #212529;
+  --gradient: none;
+}
+
+.btn-outline-secondary {
+  --btn-border-color: #f8f9fa;
+  --btn-color: #f8f9fa;
+  --btn-hover-bg: #f8f9fa;
+  --btn-hover-border-color: #f8f9fa;
+  --btn-hover-color: #000;
+  --btn-focus-shadow-rgb: 248, 249, 250;
+  --btn-active-bg: #f8f9fa;
+  --btn-active-border-color: #f8f9fa;
+  --btn-active-color: #000;
+  --btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --btn-disabled-bg: transparent;
+  --btn-disabled-border-color: #f8f9fa;
+  --btn-disabled-color: #f8f9fa;
+  --gradient: none;
+}
+
+.btn--icon {
+  --btn-padding-x: 0.9rem;
+  --btn-padding-y: 0.7rem;
+  --btn-font-size: 2.1rem;
+
+  border-radius: var(--border-radius-lg);
+}

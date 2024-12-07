@@ -1,133 +1,20 @@
-/*=== FONTS ===*/
-@font-face {
-  font-family: "Verdana";
-  src: url("./src/assets/fonts/verdana/Verdana-BoldItalic.eot");
-  src: local("Verdana BoldItalic"), local("Verdana-BoldItalic"), url("./src/assets/fonts/verdana/Verdana-BoldItalic.eot?#iefix") format("embedded-opentype"), url("./src/assets/fonts/verdana/Verdana-BoldItalic.woff2") format("woff2"), url("/src/assets/fonts/verdana/Verdana-BoldItalic.woff") format("woff"), url("./src/assets/fonts/verdana/Verdana-BoldItalic.ttf") format("truetype");
-  font-weight: bold;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Verdana";
-  src: url("./src/assets/fonts/verdana/Verdana-Italic.eot");
-  src: local("Verdana Italic"), local("Verdana-Italic"), url("./src/assets/fonts/verdana/Verdana-Italic.eot?#iefix") format("embedded-opentype"), url("./src/assets/fonts/verdana/Verdana-Italic.woff2") format("woff2"), url("./src/assets/fonts/verdana/Verdana-Italic.woff") format("woff"), url("./src/assets/fonts/verdana/Verdana-Italic.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Verdana";
-  src: url("./src/assets/fonts/verdana/Verdana.eot");
-  src: local("Verdana"), url("./src/assets/fonts/verdana/Verdana.eot?#iefix") format("embedded-opentype"), url("./src/assets/fonts/verdana/Verdana.woff2") format("woff2"), url("./src/assets/fonts/verdana/Verdana.woff") format("woff"), url("./src/assets/fonts/verdana/Verdana.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Verdana";
-  src: url("./src/assets/fonts/verdana/Verdana-Bold.eot");
-  src: local("Verdana Bold"), local("Verdana-Bold"), url("./src/assets/fonts/verdana/Verdana-Bold.eot?#iefix") format("embedded-opentype"), url("./src/assets/fonts/verdana/Verdana-Bold.woff2") format("woff2"), url("./src/assets/fonts/verdana/Verdana-Bold.woff") format("woff"), url("./src/assets/fonts/verdana/Verdana-Bold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
+@import "./styles/fonts.css";
+@import "./styles/reset.css";
+@import "./styles/variables.css";
 
-
-
-
-/*=== RESET ===*/
 html {
-  box-sizing: border-box;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
-
-
-
-
-/*=== VARIABLES ===*/
-:root{
-  --color-black: #000000;
-  --color-white: #FFFFFF;
-  --color-wildSand: #f6f6f6;
-  --color-doveGray: #707070;
-  --color-famingo: #F45C43;
-  --color-amaranth: #EB3349;
-}
-
-
-
-
-/*=== BASE ===*/
-html {
-  font-family: "Verdana", sans-serif;
-  font-size: 7px;
+  font-size: 10px;
+  font-family: var(--ff-verdana), sans-serif;
   scroll-behavior: smooth;
 }
 
 body {
   width: 100%;
-  background-color: var(--color-wildSand);
+  min-height: 100dvh;
+  background-color: var(--primary-bg);
 }
 
-a {
-  text-decoration: none;
-  color: var(--color-black);
-}
-
-input, button {
-  border: none;
-  background: none;
-}
-
-.text-xs {
-  font-size: clamp(0.87rem, 0.72rem + 0.72vw, 1.28rem);
-}
-.text-sm {
-  font-size: clamp(1.04rem, 0.85rem + 0.97vw, 1.6rem);
-}
-.text-md {
-  font-size: clamp(1.25rem, 0.99rem + 1.3vw, 2rem);
-}
-.text-lg {
-  font-size: clamp(1.5rem, 1.15rem + 1.74vw, 2.5rem);
-}
-.text-xl {
-  font-size: clamp(1.8rem, 1.34rem + 2.3vw, 3.13rem);
-}
-.text-2xl {
-  font-size: clamp(2.16rem, 1.55rem + 3.04vw, 3.91rem);
-}
-.text-3xl {
-  font-size: clamp(2.59rem, 1.79rem + 3.98vw, 4.88rem);
-}
-.text-4xl {
-  font-size: clamp(3.11rem, 2.07rem + 5.21vw, 6.1rem);
-}
-
-h1 {
-  margin-top: 1.6rem;
-}
-h2 {
-  margin-bottom: 1.7rem;
-  font-size: 1.4rem;
-  color: var(--color-doveGray);
-  text-transform: uppercase;
-}
-
-
-@media screen and (min-width: 675px) {
-  article .text-2xl {
-    font-size: clamp(1.8rem, 1.34rem + 2.3vw, 3.13rem);
-  }
-}
-@media screen and (min-width: 930px) {
-  header article .text-2xl {
-    font-size: clamp(1.8rem, 1.34rem + 2.3vw, 3.13rem);
-  }
-}
-@media screen and (min-width: 1100px) {
-  header article .text-2xl {
-    font-size: clamp(2.16rem, 1.55rem + 3.04vw, 3.91rem);
-  }
+#root {
+  width: 100%;
+  height: 100%;
 }

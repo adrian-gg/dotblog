@@ -1,0 +1,135 @@
+/*
+ * ===================================================================
+ * -- VARIABLES ------------------------------------------------------
+ * ===================================================================
+ */
+
+:root {
+  /* -- colors -- */
+  --black: #000000;
+  --white: #ffffff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+
+  --primary-bg: var(--gray-100);
+  --primary-color: var(--gray-900);
+
+  --secondary-bg: var(--gray-900);
+  --secondary-color: var(--gray-100);
+
+  --tertiary-bg: var(--black);
+  --tertiary-color: var(--gray-600);
+
+  --border-width: 1px;
+  --border-style: solid;
+  --border-color: var(--gray-300);
+  --border-color-translucent: rgba(0, 0, 0, 0.175);
+  --border-radius: 0.42rem;
+  --border-radius-sm: 0.25rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 1rem;
+  --border-radius-xxl: 2rem;
+  --border-radius-2xl: calc(var(--border-radius-xl) * 2);
+  --border-radius-pill: 50rem;
+
+  /* -- fonts -- */
+  --ff-verdana: "Verdana";
+  --ff-primary: var(--ff-verdana);
+
+  --global-size-base: 1;
+  --font-size-base: calc(
+    (var(--global-size-base) * 1rem) * 1.6
+  ); /*Default rem value 16px*/
+
+  --font-size-h1: calc(var(--font-size-base) * 2.5);
+  --font-size-h2: calc(var(--font-size-base) * 2);
+  --font-size-h3: calc(var(--font-size-base) * 1.75);
+  --font-size-h4: calc(var(--font-size-base) * 1.5);
+  --font-size-h5: calc(var(--font-size-base) * 1.25);
+  --font-size-h6: calc(var(--font-size-base) * 1);
+  --font-size-text: calc(var(--font-size-base) * 0.8);
+  --font-size-text-small: calc(var(--font-size-base) * 0.7);
+
+  --fz-h1: clamp(
+    var(--font-size-h2),
+    (var(--font-size-h2) * 0.75) + 1vw,
+    var(--font-size-h1)
+  );
+  --fz-h2: clamp(
+    var(--font-size-h3),
+    (var(--font-size-h3) * 0.75) + 1vw,
+    var(--font-size-h2)
+  );
+  --fz-h3: clamp(
+    var(--font-size-h4),
+    (var(--font-size-h4) * 0.75) + 1vw,
+    var(--font-size-h3)
+  );
+  --fz-h4: clamp(
+    var(--font-size-h5),
+    (var(--font-size-h5) * 0.75) + 1vw,
+    var(--font-size-h4)
+  );
+  --fz-h5: clamp(
+    calc(var(--font-size-base) * 1.15),
+    ((var(--font-size-base) * 1.15) * 0.75) + 1vw,
+    var(--font-size-h5)
+  );
+  --fz-h6: var(--font-size-h6);
+  --fz-text: var(--font-size-text);
+  --fz-text-small: var(--font-size-text-small);
+
+  --f-h1: var(--fz-h1) var(--ff-verdana);
+  --f-h2: var(--fz-h2) var(--ff-verdana);
+  --f-h3: var(--fz-h3) var(--ff-verdana);
+  --f-h4: var(--fz-h4) var(--ff-verdana);
+  --f-h5: var(--fz-h5) var(--ff-verdana);
+  --f-h6: var(--fz-h6) var(--ff-verdana);
+  --f-txt: var(--fz-text) var(--ff-verdana);
+  --f-txt-sm: var(--fz-text-small) var(--ff-verdana);
+
+  /* -- others -- */
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1 {
+  /* font: var(--f-h1); */
+  font-size: var(--fz-h1);
+}
+
+h2 {
+  font: var(--f-h2);
+}
+
+h3 {
+  font: var(--f-h3);
+}
+
+h4 {
+  font: var(--f-h4);
+}
+
+h5 {
+  font: var(--f-h5);
+}
+
+h6 {
+  font: var(--f-h6);
+}
+
+p {
+  font: var(--f-txt);
+}
+
+p.small {
+  font: var(--f-txt-sm);
+}

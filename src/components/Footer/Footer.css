@@ -1,0 +1,13 @@
+.footer {
+  height: 8rem;
+  margin-top: 8rem;
+  padding: 3.5rem 0;
+  background-color: var(--tertiary-bg);
+  font-size: var(--font-size-sm);
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+.footer p {
+  opacity: 0.8;
+}

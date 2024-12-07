@@ -1,94 +1,136 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-import { type ArticleType } from '../type.d'
-
+import { create } from "zustand"
+import { persist } from "zustand/middleware"
+import getFromApi from "../services/apiService"
+import { ArticleMappedType, ArticleType } from "../type"
+import { excludeObjectByQuery } from "../utils/objectFilterUtils"
 
 interface State {
-  articles: ArticleType[];
-  articlesInFileTray: ArticleType[];
-  fileTrayOpened: boolean;
-  loading: boolean;
-  page: number;
-  hasMore: boolean;
-  getArticles: (query: string, reset?: boolean) => Promise<void>;
-  saveArticleToRead: (article: ArticleType) => void;
-  removeArticleToRead: (articleTitle: string) => void;
-  resetArticles: () => void;
-  setFileTrayOpened: () => void;
-  setLoading: (loading: boolean) => void;
+  articles: ArticleMappedType[]
+  page: number
+  pageSize: number
+  isLoading: boolean
+  hasMore: boolean
+  hasError: unknown
+  articlesInFileTray: ArticleMappedType[]
+  getArticles: (query: string) => Promise<void>
+  saveArticleToRead: (article: ArticleMappedType) => void
+  removeArticleFromFileTray: (article: ArticleMappedType) => void
+  resetArticles: () => void
 }
 
-export const useArticlesStore = create<State>()(persist((setState, getState) => {
-  return {
-    articles: [],
-    articlesInFileTray: [],
-    fileTrayOpened: false,
-    loading: true,
-    page: 1,
-    hasMore: false,
-    
-    getArticles: async (query, reset = false) => {
-      const API_KEY = ""
-      const state = getState()
-      const page = reset ? 1 : state.page
-      const URL = API_KEY === ""
-        ? "https://adrian-gg.github.io/dotblog/dist/articles.json"
-        : query === ""
-          ? `https://newsapi.org/v2/top-headlines?country=us&page=${page}&pageSize=10&apiKey=${API_KEY}`
-          : `https://newsapi.org/v2/everything?q=${query}&page=${page}&pageSize=10&apiKey=${API_KEY}`
+const useArticlesStore = create<State>()(
+  persist(
+    (setState, getState) => {
+      return {
+        articles: [],
+        page: 1,
+        pageSize: 10,
+        isLoading: false,
+        hasMore: true,
+        hasError: null,
+        articlesInFileTray: [],
+        getArticles: async (query) => {
+          setState({ isLoading: true })
+          try {
+            const { page, pageSize, articlesInFileTray } = getState()
+            const path =
+              query === ""
+                ? `top-headlines?country=us&page=${page}&pageSize=${pageSize}`
+                : `everything?q=${query}&page=${page}&pageSize=${pageSize}`
+            const data = await getFromApi(path)
+            const articlesMapped = toMapArticles(
+              data.articles,
+              articlesInFileTray
+            )
 
-      setState({ loading: true })
-
-      try {
-        const response = await fetch(URL)
-        if (!response.ok) {
-          throw new Error('Error fetching articles')
-        }
-        const data = await response.json()
-        const articlesMapped = mapArticles(data.articles)
-
-        setState((state) => ({
-          articles: reset ? articlesMapped : [...state.articles, ...articlesMapped],
-          loading: false,
-          page: state.page + 1,
-          hasMore: data.articles.length > 0,
-        }))
-      } catch (error) {
-        console.error('Failed to fetch articles:', error)
-        setState({ loading: false, hasMore: false })
+            setState((state) => ({
+              articles: [...state.articles, ...articlesMapped],
+              page: state.page + 1,
+              hasMore: page * pageSize < data.totalResults,
+            }))
+          } catch (error) {
+            setState({ hasMore: false, hasError: error })
+            console.error("Failed to fetch articles:", error)
+          } finally {
+            setState({ isLoading: false })
+          }
+        },
+        saveArticleToRead: (article) =>
+          setState((state) => {
+            const uppdatedArticles = state.articles.map((a) =>
+              a.title !== article.title ? a : { ...a, saved: true }
+            )
+            return {
+              articles: [...uppdatedArticles],
+              articlesInFileTray: [
+                ...state.articlesInFileTray,
+                { ...article, saved: true },
+              ],
+            }
+          }),
+        removeArticleFromFileTray: (article: ArticleMappedType) =>
+          setState((state) => {
+            const articlesMapped = state.articles.map((a) =>
+              a.title !== article.title ? a : { ...a, saved: false }
+            )
+            const restOfArticleInFileTray = excludeObjectByQuery(
+              state.articlesInFileTray,
+              "title",
+              article.title
+            )
+            return {
+              articles: [...articlesMapped],
+              articlesInFileTray: [...restOfArticleInFileTray],
+            }
+          }),
+        resetArticles: () => {
+          setState(() => ({
+            articles: [],
+            page: 1,
+            isLoading: false,
+            hasMore: true,
+            hasError: null,
+          }))
+        },
       }
     },
-    saveArticleToRead: (article) => setState((state) => ({ articlesInFileTray: [...state.articlesInFileTray, article] })),
-    removeArticleToRead: (articleTitle) => {
-      const { articlesInFileTray } = getState()
-      const newArticlesToRead = articlesInFileTray.filter((article) => article.title !== articleTitle)
-      setState(() => ({ articlesInFileTray: newArticlesToRead }))
-    },
-    resetArticles: () => setState(() => ({ articles: [], page: 1, hasMore: true })),
-    setFileTrayOpened: () =>  {
-      const { fileTrayOpened } = getState()
-      setState(() => ({ fileTrayOpened: !fileTrayOpened }))
-    },
-    setLoading: (loading) => setState(() => ({ loading })),
-  }
-}, {
-  name: 'articlesInFileTray',
-  partialize: (state) => ({ articlesInFileTray: state.articlesInFileTray }),
-}))
+    {
+      name: "dotBlog-articles",
+      partialize: (state) => ({ articlesInFileTray: state.articlesInFileTray }),
+    }
+  )
+)
 
-const mapArticles = (articles: ArticleType[]) => {
-  const articlesMapped = articles.filter(article => 
-    article.title !== "[Removed]" && article.urlToImage !== null && article.content !== null
-  ).map(article => ({
-    ...article,
-    content: filterText(article.content)
-  }));
+const toMapArticles = (
+  articles: ArticleType[],
+  articlesInFileTray: ArticleMappedType[]
+) => {
+  const articlesMapped = articles
+    .filter(
+      (article) =>
+        article.title !== "[Removed]" &&
+        article.urlToImage &&
+        article.content &&
+        article.description
+    )
+    .map((article) => ({
+      ...article,
+      content: toFilterText(article.content),
+      saved: isInFileTray(article, articlesInFileTray),
+    }))
 
-  return articlesMapped
+  return articlesMapped as ArticleMappedType[]
 }
 
-const filterText = (text: string) => {
+const toFilterText = (text: string) => {
   const regex = /\s*\[[^\]]*\]\s*$/
-  const filteredText = text.replace(regex, '')
+  const filteredText = text.replace(regex, "")
   return filteredText
 }
+
+const isInFileTray = (
+  article: ArticleType,
+  articlesInFileTray: ArticleMappedType[]
+) => articlesInFileTray.find((a) => a.title === article.title) !== undefined
+
+export default useArticlesStore

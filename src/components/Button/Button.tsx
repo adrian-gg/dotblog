@@ -1,21 +1,43 @@
-import ButtonStyle from './Button.module.css'
+import { ReactNode } from "react"
+import classNames from "../../utils/classNames"
+import "./Button.css"
 
-
-interface ButtonType {
-  type: "button" | "submit" | "reset";
-  typeStyle: "primary" | "secondary" | "tertiary" | "primary-icon" | "secondary-icon" | "tertiary-icon";
-  disabled?: boolean;
-  children: React.ReactNode;
+interface ButtonProps {
+  type: "submit" | "reset" | "button" | undefined
+  variant?: "primary" | "secondary" | "outline-primary" | "outline-secondary"
+  outline?: boolean
+  icon?: boolean
+  disabled?: boolean
+  className?: string
+  action?: () => void
+  children: ReactNode
 }
-const Button = ({ type, typeStyle, disabled, children }: ButtonType) => {
-  return(
+function Button({
+  type,
+  variant,
+  outline,
+  disabled = false,
+  className,
+  action,
+  children,
+}: ButtonProps) {
+  const classes = classNames(
+    "btn",
+    variant && `btn-${variant}`,
+    outline && "btn--outline",
+    typeof children !== "string" && "btn--icon",
+    className
+  )
+
+  return (
     <button
       type={type}
+      className={classes}
       disabled={disabled}
-      className={`${ButtonStyle.button} ${ButtonStyle[typeStyle]} text-xs`}
-    >
+      onClick={action}>
       {children}
-    </button> )
+    </button>
+  )
 }
 
 export default Button
