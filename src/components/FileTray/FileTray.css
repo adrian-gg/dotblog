@@ -29,8 +29,8 @@
 }
 
 .modal-body .empty {
-  height: 69vh;
-  height: 69dvh;
+  height: 60vh;
+  height: 60dvh;
   display: flex;
   justify-content: center;
   align-items: center;

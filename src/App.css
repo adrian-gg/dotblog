@@ -1,7 +1,6 @@
 .modal--opened {
-  min-height: 100vh;
-  min-height: 100dvh;
-  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
   filter: blur(10px);
 }
 

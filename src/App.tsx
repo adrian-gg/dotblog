@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Outlet } from "react-router-dom"
 import "./App.css"
 import ButtonTop from "./components/ButtonTop/ButtonTop"
@@ -9,6 +9,17 @@ import classNames from "./utils/classNames"
 
 function App() {
   const [filetrayOpen, setFiletrayOpen] = useState(false)
+  const refScroll = useRef(window.scrollY)
+
+  useEffect(() => {
+    if (filetrayOpen) {
+      refScroll.current = window.scrollY
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+      window.scrollTo(0, refScroll.current)
+    }
+  }, [filetrayOpen])
 
   return (
     <>
